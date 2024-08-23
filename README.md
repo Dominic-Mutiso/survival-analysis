@@ -25,7 +25,7 @@ adtte1<-adtte %>% rename_with(tolower) %>%
                   mutate(
                           aval_months = aval/30.4375
                         , status      = ifelse(cnsr == 0, 1, 0)
-                        , trt01pn_    = factor(as.factor(trt01pn), levels = c("2", "1"),
+                        , trt01pn_    = factor(trt01pn, levels = c("2", "1"),
                                                labels = c("Placebo","Active"))
                         , stratf1a    = relevel(as.factor(stratf1a), ref = "HRRm")
                         , check       = regexpr("Progression-free survival",param)
