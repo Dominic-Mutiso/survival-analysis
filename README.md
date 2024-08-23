@@ -12,3 +12,7 @@ We will use the mock shell below to generate our PFS Efficacy table.
 
  ![image](https://github.com/user-attachments/assets/045e463b-a67d-44a2-86dc-a6f6741ee594)
 
+# Data Manipulation
+NB:
+- `Surv()` function in the `{survival}` package accepts by default T/F, where TRUE is the event and False stands for censored. That is, 1 for Event and 0 for censored. Event in our case (PFS) is Death/ Disease Progression coded as 0. Recode to 1 so that R does not take it for "censored". Take care to ensure the Event is properly coded as 1.
+- We also need to convert some of the variables to type "factor". Always the first level is used as the baseline/ reference in R. Use `factor()` function to order levels using 'levels = ' argument. Else use `relevel(, ref = "")` E.g: `trt01pn = relevel(as.factor(trt01pn), ref= "")`. Trt01pn = 1 rep' 'Active drug' and Trt01pn = 2 rep' the 'Placebo'. Failure to use 'levels = " or relevel(), R will by default choose alphabetically or numerically. Consequently, the first occurence which is '1' for Active drug will be the baseline/ ref'. We don't want that! We are comparing Active drug to Placebo.
