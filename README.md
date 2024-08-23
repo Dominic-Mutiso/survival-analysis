@@ -32,10 +32,10 @@ adtte1<-adtte %>% rename_with(tolower) %>%
                         ) %>% 
                 filter (grepl("Progression-free survival", param) == "TRUE" & paramcd == "TRPROGT")
 ```
-1. # Median Progression Free Survival
+# 1. # Median Progression Free Survival
 Median PFS is the value of time t where the survival function, S(t), equals 0.5. That is, 50 % of the cohort is event free.
 
-Although Kaplan-Meier survival curves are calculated  independently for each group, meaning the order or arrangement of factor levels do not affect the computation of the survival estimates or their confidence intervals, it is good practice to explicitly order the factor levels using `factor(, levels = c())` or `relevel(, ref = "")`. Additionally, any numeric variable intended for grouping should be converted to a factor, rather than allowing R to automatically interpret it for grouping. That is what we have done in the previous step *data manipulation** for the numeric variable `trt01pn`.
+Although Kaplan-Meier survival curves are calculated  independently for each group, meaning the order or arrangement of factor levels do not affect the computation of the survival estimates or their confidence intervals, it is good practice to explicitly order the factor levels using `factor(, levels = c())` or `relevel(, ref = "")`. Additionally, any numeric variable intended for grouping should be converted to a factor, rather than allowing R to automatically interpret it for grouping. That is what we did in the previous step "**data manipulation**" for the numeric variable `trt01pn`.
 
 Argument `type` in `survfit` function is an older argument that combined `stype` and `ctype`, now deprecated. Legal values were "kaplan-meier" which is equivalent to `stype = 1`, `ctype = 1`, `"fleming-harrington"` which is equivalent to `stype = 2`, `ctype = 1`, and `"fh2"` which is equivalent to `stype = 2`and `ctype = 2`.
 
