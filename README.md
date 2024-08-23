@@ -42,7 +42,7 @@ Argument `type` in `survfit` function is an older argument that combined `stype`
 Load the `survival` package for this step.
 
    - 1.1 **Case 1:** `0 = "Censored"` and `1 = "Event"`
-     ```r
+ ```r
 #****************************************
 #Case 1: 0 = "Censored" and 1 = "Event"
 #****************************************
@@ -53,6 +53,7 @@ surv<-survfit(Surv(aval_months, status) ~ trt01pn_, data = adtte1,
 
 print(surv, digits = 4)
 names(surv)
+
 ```
      
    - 1.2 **Case 2:** `0 = "Event"` and `1 = "Censored"`
