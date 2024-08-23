@@ -41,11 +41,9 @@ Argument `type` in `survfit` function is an older argument that combined `stype`
 
 Load the `survival` package for this step.
 
-   - 1.1 **Case 1:** `0 = "Censored"` and `1 = "Event"`
+### 1.1 Case 1: `0 = "Censored"` and `1 = "Event"`
+
  ```r
-#****************************************
-#Case 1: 0 = "Censored" and 1 = "Event"
-#****************************************
 library (survival)
 
 surv<-survfit(Surv(aval_months, status) ~ trt01pn_, data = adtte1,
@@ -56,18 +54,11 @@ names(surv)
 
 ```
      
-   - 1.2 **Case 2:** `0 = "Event"` and `1 = "Censored"`
-```r
-#****************************************
-#Case 2: 0 = "Event" and 1 = "Censored"
-#****************************************
-#CDISC ADaM ADTTE has cnsr 0 = "Event" and 1 = "Censored"
-#Note R understands 1 = "Event" and 0 = "Censored"
-#If you do not want to recode, thanks to Surv_CNSR() function from "ggsurvfit"
-#package that takes care of this concern.
-#it uses CDISC ADaM ADTTE coding conventions - censor = 1, status/event = 0.
+### 1.2 **Case 2:** `0 = "Event"` and `1 = "Censored"`
+CDISC ADaM ADTTE dataset has variable **cnsr* coded as 0 for "Event" and 1 for "Censored". Recall  R interprets 1 = "Event" and 0 = "Censored". If you do not want to recode, thanks to `Surv_CNSR()` function from `ggsurvfit` package that takes care of that. It uses CDISC ADaM ADTTE coding conventions- censor = 1, status/event = 0.
 
-#install.packages("ggsurvfit")
+```r
+install.packages("ggsurvfit")
 library(ggsurvfit)
 
 survfit(Surv_CNSR(aval_months, cnsr)~ trt01pn_, data = adtte1, conf.int = 0.95,
