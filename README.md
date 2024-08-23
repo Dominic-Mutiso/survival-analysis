@@ -16,3 +16,19 @@ We will use the mock shell below to generate our PFS Efficacy table.
 NB:
 - `Surv()` function in the `{survival}` package accepts by default T/F, where TRUE is the event and False stands for censored. That is, 1 for Event and 0 for censored. Event in our case (PFS) is Death/ Disease Progression coded as 0. Recode to 1 so that R does not take it for "censored". Take care to ensure the Event is properly coded as 1.
 - We also need to convert some of the variables to type "factor". Always the first level is used as the baseline/ reference in R. Use `factor()` function to order levels using 'levels = ' argument. Else use `relevel(, ref = "")` E.g: `trt01pn = relevel(as.factor(trt01pn), ref= "")`. Trt01pn = 1 rep' 'Active drug' and Trt01pn = 2 rep' the 'Placebo'. Failure to use 'levels = " or relevel(), R will by default choose alphabetically or numerically. Consequently, the first occurence which is '1' for Active drug will be the baseline/ ref'. We don't want that! We are comparing Active drug to Placebo.
+
+```r
+adtte1<-adtte %>% rename_with(tolower) %>% 
+                  select( usubjid, trt01a, trt01an, aval, param, paramcd, cnsr
+                         , evntdesc, stratf1a, stratf2a, trt01pn, trt01p, parqual
+                         ) %>% 
+                  mutate(
+                          aval_months = aval/30.4375
+                        , status      = ifelse(cnsr == 0, 1, 0)
+                        , trt01pn_    = factor(as.factor(trt01pn), levels = c("2", "1"),
+                                               labels = c("Placebo","Active"))
+                        , stratf1a    = relevel(as.factor(stratf1a), ref = "HRRm")
+                        , check       = regexpr("Progression-free survival",param)
+                        ) %>% 
+                filter (grepl("Progression-free survival", param) == "TRUE" & paramcd == "TRPROGT")
+```
