@@ -64,3 +64,37 @@ library(ggsurvfit)
 survfit(Surv_CNSR(aval_months, cnsr)~ trt01pn_, data = adtte1, conf.int = 0.95,
         stype = 1, ctype = 1, conf.type = "log-log")
 ```
+### 1.3  Median PFS results as a dataframe
+If you require your results for further processing use `surv_median()` function from `survminer`. One can use results from either **case 1** or **case 2**.
+
+```r
+install.packages("survminer")
+
+library(survminer)
+
+med_surv<-surv_median(surv)
+
+View(med_surv)
+
+med_surv<- med_surv %>% mutate (
+                                strata = gsub("=", "", strata)
+                              , median = sprintf("%10.1f", median)
+                              , med_ci = paste(sprintf("%5.1f", lower), 
+                                               trimws(sprintf("%5.1f", upper)), 
+                                               sep = " - " 
+                                              )
+                               ) %>% select (-c(lower, upper))
+                       
+View(med_surv)
+
+```
+
+
+
+
+
+
+
+
+
+
