@@ -1,4 +1,4 @@
-# Progression-Free Survival (PFS) Efficacy Table using R
+# Progression-Free Survival (PFS) Efficacy Table in R
 PFS can de defined as the time from randomisation/ initiation of treatament to disease progression or death from any cause. In most solid tumor oncology trials, Progression-Free Survival (PFS) is used as the primary endpoint. Since PFS involves time-to-event anylysis, we use ADTTE (Time-to-Event) ADaM dataset. Basic principles of Survival Analysis such as censoring, hazard and survival functions will play a big role in generating our PFS Efficacy table.
 
 Additionally, we make use of advanced techniques for **Non-parametric estimation** (Kaplan-Meier), **Hypothesis Testing**: Non-parametric approach (Log-Rank Test) and **Regression Analysis**: Cox Proportional Hazards Model (CPHM). Therefore, familiarity with Survival Analysis is required!
@@ -32,14 +32,43 @@ adtte1<-adtte %>% rename_with(tolower) %>%
                         ) %>% 
                 filter (grepl("Progression-free survival", param) == "TRUE" & paramcd == "TRPROGT")
 ```
-# 1. # Median Progression Free Survival
+# 1. Median Progression Free Survival
 Median PFS is the value of time t where the survival function, S(t), equals 0.5. That is, 50 % of the cohort is event free.
 
 Although Kaplan-Meier survival curves are calculated  independently for each group, meaning the order or arrangement of factor levels do not affect the computation of the survival estimates or their confidence intervals, it is good practice to explicitly order the factor levels using `factor(, levels = c())` or `relevel(, ref = "")`. Additionally, any numeric variable intended for grouping should be converted to a factor, rather than allowing R to automatically interpret it for grouping. That is what we did in the previous step "**data manipulation**" for the numeric variable `trt01pn`.
 
 Argument `type` in `survfit` function is an older argument that combined `stype` and `ctype`, now deprecated. Legal values were "kaplan-meier" which is equivalent to `stype = 1`, `ctype = 1`, `"fleming-harrington"` which is equivalent to `stype = 2`, `ctype = 1`, and `"fh2"` which is equivalent to `stype = 2`and `ctype = 2`.
 
+Load the `survival` package for this step.
+
    - 1.1 **Case 1:** `0 = "Censored"` and `1 = "Event"`
+     ```r
+#****************************************
+#Case 1: 0 = "Censored" and 1 = "Event"
+#****************************************
+library (survival)
+
+surv<-survfit(Surv(aval_months, status) ~ trt01pn_, data = adtte1,
+                stype = 1, ctype = 1, conf.type = "log-log", conf.int = 0.95 )
+
+print(surv, digits = 4)
+names(surv)
+```
      
    - 1.2 **Case 2:** `0 = "Event"` and `1 = "Censored"`
+```r
+#****************************************
+#Case 2: 0 = "Event" and 1 = "Censored"
+#****************************************
+#CDISC ADaM ADTTE has cnsr 0 = "Event" and 1 = "Censored"
+#Note R understands 1 = "Event" and 0 = "Censored"
+#If you do not want to recode, thanks to Surv_CNSR() function from "ggsurvfit"
+#package that takes care of this concern.
+#it uses CDISC ADaM ADTTE coding conventions - censor = 1, status/event = 0.
 
+#install.packages("ggsurvfit")
+library(ggsurvfit)
+
+survfit(Surv_CNSR(aval_months, cnsr)~ trt01pn_, data = adtte1, conf.int = 0.95,
+        stype = 1, ctype = 1, conf.type = "log-log")
+```
