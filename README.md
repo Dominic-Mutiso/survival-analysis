@@ -41,7 +41,7 @@ Argument `type` in `survfit` function is an older argument that combined `stype`
 
 Load the `survival` package for this step.
 
-### 1.1 Case 1: `0 = "Censored"` and `1 = "Event"`
+### 1.1) Case 1: `0 = "Censored"` and `1 = "Event"`
 
  ```r
 library (survival)
@@ -54,8 +54,8 @@ names(surv)
 
 ```
      
-### 1.2 **Case 2:** `0 = "Event"` and `1 = "Censored"`
-CDISC ADaM ADTTE dataset has variable **cnsr* coded as 0 for "Event" and 1 for "Censored". Recall  R interprets 1 = "Event" and 0 = "Censored". If you do not want to recode, thanks to `Surv_CNSR()` function from `ggsurvfit` package that takes care of that. It uses CDISC ADaM ADTTE coding conventions- censor = 1, status/event = 0.
+### 1.2) **Case 2:** `0 = "Event"` and `1 = "Censored"`
+CDISC ADaM ADTTE dataset has variable *cnsr* coded as 0 for "Event" and 1 for "Censored". Recall  R interprets 1 = "Event" and 0 = "Censored". If you do not want to recode, thanks to `Surv_CNSR()` function from `ggsurvfit` package that takes care of that. It uses CDISC ADaM ADTTE coding conventions- censor = 1, status/event = 0.
 
 ```r
 install.packages("ggsurvfit")
@@ -64,8 +64,8 @@ library(ggsurvfit)
 survfit(Surv_CNSR(aval_months, cnsr)~ trt01pn_, data = adtte1, conf.int = 0.95,
         stype = 1, ctype = 1, conf.type = "log-log")
 ```
-### 1.3  Median PFS results as a dataframe
-If you require your results for further processing use `surv_median()` function from `survminer`. One can use results from either **case 1** or **case 2**.
+### 1.3)  Median PFS Dataframe results
+If you require your results for further processing use `surv_median()` function from `survminer` package. One can use results from either **case 1** or **case 2**.
 
 ```r
 install.packages("survminer")
@@ -88,10 +88,10 @@ med_surv<- med_surv %>% mutate (
 View(med_surv)
 
 ```
-
-
-
-
+### 1.4) 25% 50% and 75% survival time and CI
+```
+quantile(surv, probs = c(25,50,75)/100)
+```
 
 
 
