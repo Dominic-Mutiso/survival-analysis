@@ -140,4 +140,48 @@ time_pt<- time_pt %>% mutate(
                             ) %>% select(strata, survival, tp_ci)
 
 ```
-#3. Stratified Log-rank test
+# 3. Stratified Log-rank test
+We can use either the `survdiff()` function or a combination of `survfit()` and `surv_pvalue()` to generate the p-value. A combination of `survfit()` and `surv_pvalue()` works best if you require the results for further processing.
+
+```r
+#***********************************************
+#Option 1: Using "survdiff" function
+#***********************************************
+#a.)
+survdiff(Surv(aval_months, status)~ trt01pn + strata(stratf1a), adtte1)
+
+#b.)
+pval<-survdiff(Surv_CNSR(aval_months, cnsr)~ trt01pn_ + strata(stratf1a), adtte1)
+print(pval, digits = 6)
+
+###Further manually;
+pval_<- 1 - pchisq(pval$chisq, length(pval$n)-1)
+pval_
+```
+```r
+#**************************************************
+#Option 2: Using both survfit() and surv_pvalue()
+#**************************************************
+surv1<-survfit(Surv(aval_months, status) ~ trt01pn_ + strata(stratf1a), data = adtte1, 
+              stype = 1, ctype = 1, conf.int = 0.95, conf.type="log-log")
+
+pvalue<-surv_pvalue(surv1)
+
+View(pvalue)
+
+pvalue<-pvalue %>% mutate (
+                             pval   = sprintf("%12.3f", pval)
+                           , strata = sub("\\+(.+)", "Active", variable)
+                           ) %>% select(pval, strata)
+
+View(pvalue)
+```
+
+
+
+
+
+
+
+
+
