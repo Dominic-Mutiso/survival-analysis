@@ -57,7 +57,7 @@ names(surv)
 ```
      
 ### 1.1.2) **Case 2:** `0 = "Event"` and `1 = "Censored"`
-CDISC ADaM ADTTE dataset has variable *cnsr* coded as 0 for "Event" and 1 for "Censored". Recall  R interprets 1 = "Event" and 0 = "Censored". If you do not want to recode, thanks to `Surv_CNSR()` function from `ggsurvfit` package that takes care of that. It uses CDISC ADaM ADTTE coding conventions- censor = 1, status/event = 0.
+CDISC ADaM ADTTE dataset has variable *cnsr* coded as 0 for "Event" and 1 for "Censored". Recall  R interprets 1 as "Event" and 0 as "Censored". If you do not want to recode, thanks to `Surv_CNSR()` function from `ggsurvfit` package that takes care of that. It uses CDISC ADaM ADTTE coding conventions- censor = 1, status/event = 0.
 
 ```r
 install.packages("ggsurvfit")
@@ -95,7 +95,7 @@ View(med_surv)
 quantile(surv, probs = c(25,50,75)/100)
 ```
 
-
+# 2. Survival Probability at Specific Timepoint (6 Months)
 
 
 
