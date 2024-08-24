@@ -96,8 +96,9 @@ quantile(surv, probs = c(25,50,75)/100)
 ```
 
 # 2. Survival Probability at Specific Timepoint (6 Months)
-For specific time-points, we make use of the `summary ()` function with argument `times = `. Else, if we are not interested with specific timepoints, we can resort to `surv_summary()` from the `survminer` package. To create a dataframe, make use of `names()` or `str()` to view the structure.
+For specific time-points, we can use the `summary ()` function with argument `times = `. If we are not interested in specific timepoints, we can use`surv_summary()` from the `survminer` package. To create a dataframe- in the case of specific timepoints- make use of `names()` or `str()` to view the structure.
 
+For specific time points, we can use the summary() function with the argument times = . If we are not interested in specific time points, we can use surv_summary() from the survminer package. To create a dataframe for specific time points, you can use names() or str() to view the structure.
 ```r
 #with all time points at which a curve has a step
 surv_summary(surv)
