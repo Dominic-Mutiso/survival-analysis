@@ -141,6 +141,8 @@ time_pt<- time_pt %>% mutate(
 
 ```
 # 3. Stratified Log-rank test
+Log-rank test- tests whether there is a significant difference in survival between two or more independent groups.
+
 We can use either the `survdiff()` function or a combination of `survfit()` and `surv_pvalue()` to generate the **p-value**. A combination of `survfit()` and `surv_pvalue()` works best if you require the results for further processing.
 
 ```r
@@ -197,16 +199,18 @@ plot<-ggsurvplot(surv1, data = adtte1,
 
 plot$plot <- plot$plot +
         guides(color = guide_legend(override.aes = list(shape = NA)),  # Remove the censoring symbol
-               linetype = guide_legend(override.aes = list(shape = NA))) 
+               linetype = guide_legend(override.aes = list(shape = NA)))
+
+plot
 ```
 ![image](https://github.com/user-attachments/assets/97bb6116-620f-44d6-b84e-607595d92e09)
 
 
 From this plot we can observe the following:
  1. Within each strata (HRR status), active drug is superior to placebo.
- 2. Subjects with the wild type HRR status have better survival compared to those with mutatant HRR status.
+ 2. Subjects with the wild type HRR status have better survival compared to those with mutant HRR status.
     
- 
+ # 4. Cox Proportional Hazards Model (CPHM)
 
 
 
