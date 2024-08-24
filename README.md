@@ -96,7 +96,47 @@ quantile(surv, probs = c(25,50,75)/100)
 ```
 
 # 2. Survival Probability at Specific Timepoint (6 Months)
+For specific time-points, we make use of the `summary ()` function with argument `times = `. Else, if we are not interested with specific timepoints, we can resort to `surv_summary()` from the `survminer` package. To create a dataframe, make use of `names()` or `str()` to view the structure.
 
+```r
+#with all time points at which a curve has a step
+surv_summary(surv)
 
+#more than one specified timepoint- 0, 6, 12, 18, 24, 30
+summary(surv, times = c(0, 6*(1:5)))
 
+#one specific timepoint- 6.
+tp<-summary(surv, times = 6)
+
+tp
+
+# Inspect the structure of the summary object
+names(tp)
+
+str(tp)
+
+# Convert the summary to a data frame
+time_pt <- data.frame(
+                        time     = tp$time    
+                      , n.risk   = tp$n.risk  
+                      , n.event  = tp$n.event 
+                      , survival = (tp$surv*100)    
+                      , std.err  = tp$std.err 
+                      , lower    = tp$lower * 100   
+                      , upper    = tp$upper * 100  
+                      , strata   = gsub("=", "", tp$strata)
+)
+
+# View the data frame
+View(time_pt)
+
+time_pt<- time_pt %>% mutate(
+                            survival = sprintf("%10.1f", survival)
+                           ,tp_ci   = paste( sprintf("%5.1f", lower)
+                                           , sprintf("%5.1f", upper)
+                                           , sep= " -"
+                                            )
+                            ) %>% select(strata, survival, tp_ci)
+
+```
 
