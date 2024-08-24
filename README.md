@@ -98,7 +98,7 @@ quantile(surv, probs = c(25,50,75)/100)
 # 2. Survival Probability at Specific Timepoint (6 Months)
 For specific time-points, we can use the `summary ()` function with argument `times = `. If we are not interested in specific timepoints, we can use`surv_summary()` from the `survminer` package. To create a dataframe- in the case of specific timepoints- make use of `names()` or `str()` to view the structure.
 
-For specific time points, we can use the summary() function with the argument times = . If we are not interested in specific time points, we can use surv_summary() from the survminer package. To create a dataframe for specific time points, you can use names() or str() to view the structure.
+For specific time points, we can use the `summary()` function with the argument `times =`. If we are not interested in specific time points, we can use `surv_summary()` from the `survminer` package. To create a dataframe for specific time points, you can use `names()` or `str()` to view the structure.
 ```r
 #with all time points at which a curve has a step
 surv_summary(surv)
@@ -141,7 +141,7 @@ time_pt<- time_pt %>% mutate(
 
 ```
 # 3. Stratified Log-rank test
-We can use either the `survdiff()` function or a combination of `survfit()` and `surv_pvalue()` to generate the p-value. A combination of `survfit()` and `surv_pvalue()` works best if you require the results for further processing.
+We can use either the `survdiff()` function or a combination of `survfit()` and `surv_pvalue()` to generate the **p-value**. A combination of `survfit()` and `surv_pvalue()` works best if you require the results for further processing.
 
 ```r
 #***********************************************
@@ -176,8 +176,29 @@ pvalue<-pvalue %>% mutate (
 
 View(pvalue)
 ```
-The p-value from the survdiff() or surv_pvalue() function does not indicate which treatment is superior. It only tells us whether there is a significant difference between the survival curves. Therefore, we should use a survival plot to visually assess which treatment is superior.
+The *p-value* from the `survdiff()` or `surv_pvalue()` function does not indicate which treatment is superior. It only tells us whether there is a significant difference between the survival curves. Therefore, we should use a survival plot to visually assess which treatment is superior.
+``r
+# Plot the survival curves
+plot<-ggsurvplot(surv1, data = adtte1,
+           legend.labs = c("placebo HRRm", "placebo HRRwt", "active HRRm", "active HRRwt"),
+           xlab = "Time in days", 
+           ylab = "Survival probability",
+           ggtheme = theme_minimal(base_size = 15),
+           size = 0.5,  # Reduce line size
+           font.x = c(7),  # Reduce x-axis font size
+           font.y = c(7),  # Reduce y-axis font size
+           font.legend = c(7),  # Reduce legend font size
+           font.tickslab = c(6),
+           palette = c("red", "red", "blue", "blue"),
+           linetype = c("dotted", "solid", "dotted", "solid"),
+           legend = "right"
+           )
 
+
+plot$plot <- plot$plot +
+        guides(color = guide_legend(override.aes = list(shape = NA)),  # Remove the censoring symbol
+               linetype = guide_legend(override.aes = list(shape = NA))) 
+```
 ![image](https://github.com/user-attachments/assets/97bb6116-620f-44d6-b84e-607595d92e09)
 
 
