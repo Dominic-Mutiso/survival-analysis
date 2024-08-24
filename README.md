@@ -176,6 +176,7 @@ pvalue<-pvalue %>% mutate (
 
 View(pvalue)
 ```
+![image](https://github.com/user-attachments/assets/ac25b472-1245-48e8-b16a-a25bc14482af)
 
 
 
