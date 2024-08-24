@@ -140,4 +140,4 @@ time_pt<- time_pt %>% mutate(
                             ) %>% select(strata, survival, tp_ci)
 
 ```
-
+#3. Stratified Log-rank test
