@@ -1,4 +1,4 @@
-# Progression-Free Survival (PFS) Efficacy Table in R
+![image](https://github.com/user-attachments/assets/4d15a5f0-f825-4b4a-8e65-e900c9ce3218)# Progression-Free Survival (PFS) Efficacy Table in R
 PFS can de defined as the time from randomisation/ initiation of treatament to disease progression or death from any cause. In most solid tumor oncology trials, Progression-Free Survival (PFS) is used as the primary endpoint. Since PFS involves time-to-event anylysis, we use ADTTE (Time-to-Event) ADaM dataset. Basic principles of Survival Analysis such as censoring, hazard and survival functions will play a big role in generating our PFS Efficacy table.
 
 Additionally, we make use of advanced techniques for **Non-parametric estimation** (Kaplan-Meier), **Hypothesis Testing**: Non-parametric approach (Log-Rank Test) and **Regression Analysis**: Cox Proportional Hazards Model (CPHM). Therefore, familiarity with Survival Analysis is required!
@@ -176,12 +176,14 @@ pvalue<-pvalue %>% mutate (
 
 View(pvalue)
 ```
-![image](https://github.com/user-attachments/assets/ac25b472-1245-48e8-b16a-a25bc14482af)
+The p-value from the survdiff() or surv_pvalue() function does not indicate which treatment is superior. It only tells us whether there is a significant difference between the survival curves. Therefore, we should use a survival plot to visually assess which treatment is superior.
 
+![image](https://github.com/user-attachments/assets/4c5a6d05-2e85-40bd-916b-c65f7437fa91)
 
-
-
-
+From this plot we can observe the following:
+ (1) Within each strata (HRR status), active drug is superior to placebo
+ (2) subjects carrying the wild type HRR status have better survival compared to those with mutatant HRR status
+ 
 
 
 
