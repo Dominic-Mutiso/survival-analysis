@@ -177,7 +177,7 @@ pvalue<-pvalue %>% mutate (
 View(pvalue)
 ```
 The *p-value* from the `survdiff()` or `surv_pvalue()` function does not indicate which treatment is superior. It only tells us whether there is a significant difference between the survival curves. Therefore, we should use a survival plot to visually assess which treatment is superior.
-``r
+```r
 # Plot the survival curves
 plot<-ggsurvplot(surv1, data = adtte1,
            legend.labs = c("placebo HRRm", "placebo HRRwt", "active HRRm", "active HRRwt"),
