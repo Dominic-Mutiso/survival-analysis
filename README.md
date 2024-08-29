@@ -222,8 +222,9 @@ When an independent variable is categorical, it’s important to choose a baseli
 
 ## Cox Unadjusted for stratf1a
 ![image](https://github.com/user-attachments/assets/dcb06943-9a27-42b0-9408-787674693027)
-We see that the estimate of the log hazard ratio treatment effect, B&#770; is 0.05214.
-Since this is positive, higher hazards are associated with the treatment than with the control. That is, the treatment appears to reduce survival, which would be an
-unfortunate result. The value of eB&#770; 1.054 is also given, suggesting (incorrectly, as
-we know) that the treatment is associated with a 5.4% additional risk of death/ disease progression over
-the control. 
+
+The estimate of the log hazard ratio treatment effect, B&#770; is 0.05214. Since this is positive, higher hazards are associated with the active drug than with the placebo. That is, the active drug appears to reduce survival- quite unfortunate. The value of exp(B&#770;) is 1.054 meaning the risk of death/disease progression is higher on the active drug by about 5.4%. 
+
+
+
+
