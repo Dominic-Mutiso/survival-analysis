@@ -220,12 +220,12 @@ When an independent variable is categorical, it’s important to choose a baseli
 
 *Hazard function* is the conditional probability that an event will occur at time *t* having survived to that time.
 
-## Unadjusted Cox Regression
+## 4.1) Unadjusted Cox Regression
 ![image](https://github.com/user-attachments/assets/dcb06943-9a27-42b0-9408-787674693027)
 
 The estimate of the log hazard ratio treatment effect, B&#770; is 0.05214. Since this is positive, higher hazards are associated with the active drug than with the placebo. That is, the active drug appears to reduce survival- quite unfortunate. The value of exp(B&#770;) is 1.054 meaning the risk of death/disease progression is higher on the active drug by about 5.4%. 
 
-## Adjusted Cox Regression
+## 4.2) Adjusted Cox Regression
 ### Stratified Cox Model
 ![image](https://github.com/user-attachments/assets/7cf30773-cee8-4dc4-bd8a-d5a01f9472d4)
 
@@ -235,6 +235,11 @@ The coefficient is now negative. This means within each stratification, the acti
 
 Again the co-efficient associated with the active drug is negative. The stratum HRRwt has negative co-efficient and thus is associated with lower hazard than the reference HRRm.
 
+## Options of viewing results.
+  1. `summary ()`- used to view results in the console.
+  2. `tbl_regression ()`- comes from `gtsummary` package. Used to view results in a table.
+  3. `tidy ()`- comes from the `broom` library. View results as a dataframe. Useful if you need the results for further processing. Use `??tidy.coxph` to explore this fuction further.
+     Syntax: *tidy(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)*
 
 
 
