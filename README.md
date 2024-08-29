@@ -233,7 +233,7 @@ The coefficient is now negative. This means within each stratification, the acti
 
 ![image](https://github.com/user-attachments/assets/cf999813-23ac-4b23-9916-eee2dff75435)
 
-Again the co-efficient associated with the active drug is negative. The stratum HRRwt has negatice co-efficient  and thus is associated with lower hazard than the reference HRRm.
+Again the co-efficient associated with the active drug is negative. The stratum HRRwt has negative co-efficient and thus is associated with lower hazard than the reference HRRm.
 
 
 
