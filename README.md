@@ -239,13 +239,13 @@ Again the co-efficient associated with the active drug is negative. The stratum 
   1. `summary ()`
    - Used to view results directly in the console.
   3. `tbl_regression 
-    - Comes from the `gtsummary` package.
-    - Used to display results in a formatted table.
+  - Comes from the `gtsummary` package.
+  - Used to display results in a formatted table.
   4. `tidy ()`
-    - Comes from the `broom` package.
-    - Presents results as a dataframe. Useful if results are required for further processing.
-    - To explore this fuction further, use `?tidy.coxph`.
-    - Syntax:
+  - Comes from the `broom` package.
+  - Presents results as a dataframe. Useful if results are required for further processing.
+  - To explore this fuction further, use `?tidy.coxph`.
+  - Syntax:
      ```r
      tidy(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
      
