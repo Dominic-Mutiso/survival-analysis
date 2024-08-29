@@ -210,7 +210,20 @@ From this plot we can observe the following:
  2. Subjects with the wild type HRR status have better survival compared to those with mutant HRR status.
     
  # 4. Cox Proportional Hazards Model (CPHM)
+Used to fit regression models to sensored survival data. It accounts for the effects of continuous and discrete covariate (independent
+variable) measurements when the dependent variable is possibly censored time-to-event data.
 
+ It assumes that the effects of the independent variables upon survival are constant over time and are additive in one scale.
+ B&#770;
 
+When an independent variable is categorical, it’s important to choose a baseline/reference group, as hazard ratios are calculated by comparing the other levels to the reference group.
 
+*Hazard function* is the conditional probability that an event will occur at time *t* having survived to that time.
 
+## Cox Unadjusted for stratf1a
+![image](https://github.com/user-attachments/assets/dcb06943-9a27-42b0-9408-787674693027)
+We see that the estimate of the log hazard ratio treatment effect, B&#770; is 0.05214.
+Since this is positive, higher hazards are associated with the treatment than with the control. That is, the treatment appears to reduce survival, which would be an
+unfortunate result. The value of eB&#770; 1.054 is also given, suggesting (incorrectly, as
+we know) that the treatment is associated with a 5.4% additional risk of death/ disease progression over
+the control. 
