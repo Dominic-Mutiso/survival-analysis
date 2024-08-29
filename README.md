@@ -229,8 +229,11 @@ The estimate of the log hazard ratio treatment effect, B&#770; is 0.05214. Since
 ### Stratified Cox Model
 ![image](https://github.com/user-attachments/assets/7cf30773-cee8-4dc4-bd8a-d5a01f9472d4)
 
-The coefficient is now negative. This means within each stratification, the active drug is effective. We can also  explicitly estimate the stratification effect,
+The coefficient is now negative. This means within each stratification, the active drug is effective. We can also  explicitly estimate the stratification effect.
 
+![image](https://github.com/user-attachments/assets/cf999813-23ac-4b23-9916-eee2dff75435)
+
+Again the co-efficient associated with the active drug is negative. The stratum HRRwt has negatice co-efficient  and thus is associated with lower hazard than the reference HRRm.
 
 
 
