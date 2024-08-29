@@ -236,10 +236,24 @@ The coefficient is now negative. This means within each stratification, the acti
 Again the co-efficient associated with the active drug is negative. The stratum HRRwt has negative co-efficient and thus is associated with lower hazard than the reference HRRm.
 
 ## Options of viewing results.
-  1. `summary ()`- used to view results in the console.
-  2. `tbl_regression ()`- comes from `gtsummary` package. Used to view results in a table.
-  3. `tidy ()`- comes from the `broom` library. View results as a dataframe. Useful if you need the results for further processing. Use `??tidy.coxph` to explore this fuction further.
-     Syntax: *tidy(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)*
+  1. `summary ()`
+    - Used to view results directly in the console.
+  2. `tbl_regression 
+    - Comes from the `gtsummary` package.
+    - Used to display results in a formatted table.
+  3. `tidy ()`
+    - Comes from the `broom` package.
+    - Presents results as a dataframe. Useful if results are required for further processing.
+    - To explore this fuction further, use `?tidy.coxph`.
+    - Syntax:
+     ```r
+     tidy(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
+     
+     ```
 
+
+Comes from the broom package.
+Presents results as a dataframe, useful for further processing.
+To explore this function further, use ??tidy.coxph.
 
 
