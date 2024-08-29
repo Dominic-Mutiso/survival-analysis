@@ -220,10 +220,17 @@ When an independent variable is categorical, it’s important to choose a baseli
 
 *Hazard function* is the conditional probability that an event will occur at time *t* having survived to that time.
 
-## Cox Unadjusted for stratf1a
+## Unadjusted Cox Regression
 ![image](https://github.com/user-attachments/assets/dcb06943-9a27-42b0-9408-787674693027)
 
 The estimate of the log hazard ratio treatment effect, B&#770; is 0.05214. Since this is positive, higher hazards are associated with the active drug than with the placebo. That is, the active drug appears to reduce survival- quite unfortunate. The value of exp(B&#770;) is 1.054 meaning the risk of death/disease progression is higher on the active drug by about 5.4%. 
+
+## Adjusted Cox Regression
+### Stratified Cox Model
+![image](https://github.com/user-attachments/assets/7cf30773-cee8-4dc4-bd8a-d5a01f9472d4)
+
+The coefficient is now negative. This means within each stratification, the active drug is effective. We can also  explicitly estimate the stratification effect,
+
 
 
 
