@@ -258,8 +258,47 @@ Again the co-efficient associated with the active drug is negative. The stratum 
      tidy(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
      
      ```
- 
+     ```r
+     library(broom)                                                                        
+     cox.df<-cox %>% 
+          tidy(conf.int = TRUE, exponentiate = TRUE) %>% 
+          select(term, estimate, starts_with("conf"))
 
+     View(cox.df)
+
+     cox.df<-cox.df %>% mutate(
+                           hr    = sprintf("%11.2f", estimate)
+                         , hr_ci = paste(sprintf("%6.2f", conf.low)
+                                       , gsub("^\\s+","",sprintf("%6.2f", conf.high))
+                                       , sep = " - ")
+                         ) %>% 
+                   select (strata = term, starts_with("hr"))
+        
+      View(cox.df)
+    ```
+# 5. Reporting Effort
+## Combining the Four Datasets
+
+In this analysis, we have already derived key survival statistical metrics which are stored in the following datasets:
+
+1. **Median Progression-Free Survival (PFS)**: The median survival time is provided in the `med_surv` dataset.
+
+2. **PFS Rate at 6 Months**: The PFS rate at the 6-month time point is included in the `time_pt` dataset.
+
+3. **Hazard Ratio**: The hazard ratio is in the `cox.df` dataset.
+
+4. **2-Sided p-Value**: The 2-sided p-value, obtained through a stratified log-rank test, is available in the `pvalue` dataset.
+
+These datasets will be combined to create our report and produce a PFS efficacy table using the mock shell provided.
+```r
+complete_data<-bind_rows(med_surv, time_pt, cox.df, pvalue)
+
+View(complete_data)
+
+![image](https://github.com/user-attachments/assets/9e3f5473-170d-4b82-a485-5d4f6514f0fd)
+
+```
+## Transpose data to shell format
 
 
 
