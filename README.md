@@ -238,6 +238,9 @@ Again the co-efficient associated with the active drug is negative. The stratum 
 ## Options of viewing results.
   1. `summary ()`
    - Used to view results directly in the console.
+     ```
+     summary(cox)
+     ```
   3. `tbl_regression`
   - Comes from the `gtsummary` package.
   - Used to display results in a formatted table.
@@ -255,6 +258,24 @@ Again the co-efficient associated with the active drug is negative. The stratum 
      tidy(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
      
      ```
+     ```
+     library(broom)                                                                        
+     cox.df<-cox %>% 
+          tidy(conf.int = TRUE, exponentiate = TRUE) %>% 
+          select(term, estimate, starts_with("conf"))
+
+     View(cox.df)
+
+cox.df<-cox.df %>% mutate(
+                           hr    = sprintf("%11.2f", estimate)
+                         , hr_ci = paste(sprintf("%6.2f", conf.low)
+                                       , gsub("^\\s+","",sprintf("%6.2f", conf.high))
+                                       , sep = " - ")
+                         ) %>% 
+        select (strata = term, starts_with("hr"))
+        
+View(cox.df)
+```
 
 
 
