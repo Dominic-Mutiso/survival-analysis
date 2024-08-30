@@ -238,7 +238,7 @@ Again the co-efficient associated with the active drug is negative. The stratum 
 ## Options of viewing results.
   1. `summary ()`
    - Used to view results directly in the console.
-     ```
+     ```r
      summary(cox)
      ```
   3. `tbl_regression`
@@ -258,7 +258,7 @@ Again the co-efficient associated with the active drug is negative. The stratum 
      tidy(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
      
      ```
-     ```
+     ```r
      library(broom)                                                                        
      cox.df<-cox %>% 
           tidy(conf.int = TRUE, exponentiate = TRUE) %>% 
@@ -275,8 +275,9 @@ Again the co-efficient associated with the active drug is negative. The stratum 
                    select (strata = term, starts_with("hr"))
         
      View(cox.df)
-```
+  ```
 
+# 5. Transpose data to shell format
 
 
 
