@@ -295,10 +295,30 @@ complete_data<-bind_rows(med_surv, time_pt, cox.df, pvalue)
 
 View(complete_data)
 ```
-![image](https://github.com/user-attachments/assets/9e3f5473-170d-4b82-a485-5d4f6514f0fd)
+![image](https://github.com/user-attachments/assets/c95bb281-5236-4116-8c6a-1e01d81988ab)
 
 ## Transpose data to shell format
+```r
+complete_data_t<-complete_data %>% pivot_longer(cols=c(median, med_ci, survival, tp_ci, hr, hr_ci, pval ),
+                       names_to="description", values_to="stat") %>% 
+        na.omit() %>% 
+        pivot_wider(names_from = strata, values_from = stat) %>%
+        mutate(
+                description = gsub("^medi\\w+", "Median progression-free survival (months)", description) 
+                , description = str_replace(description, "^med_\\w+", "95% CI for Median progression-free survival")
+                , description = gsub("^sur\\w+", "Alive and progression-free survival rate at 6 months (APF6) (%)", description) 
+                , description = gsub("^tp_\\w+", "95% CI for progression-free survival rate at 6 months", description )
+                , description = gsub("^hr$", "Hazard ratio, Active drug versus Placebo (standard treatment)", description )
+                , description = gsub("^hr_\\w+", "95% CI for hazard ratio ", description )
+                , description = gsub("^pval$", "2-sided p-value", description )
+        ) %>% select (description, trt01pn_Active, trt01pn_Placebo)
 
+View(complete_data_t)
+```
+### Final report 
+![image](https://github.com/user-attachments/assets/e7d3c829-cbcd-45b5-a048-bc8010483778)
+
+This is the final report, which aligns with the requirements outlined in the mock shell.
 
 
 
