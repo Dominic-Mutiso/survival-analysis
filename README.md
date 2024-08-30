@@ -294,10 +294,9 @@ These datasets will be combined to create our report and produce a PFS efficacy 
 complete_data<-bind_rows(med_surv, time_pt, cox.df, pvalue)
 
 View(complete_data)
-
+```
 ![image](https://github.com/user-attachments/assets/9e3f5473-170d-4b82-a485-5d4f6514f0fd)
 
-```
 ## Transpose data to shell format
 
 
