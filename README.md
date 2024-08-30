@@ -258,6 +258,7 @@ Again the co-efficient associated with the active drug is negative. The stratum 
      tidy(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
      
      ```
+  - Code:
      ```r
      library(broom)                                                                        
      cox.df<-cox %>% 
@@ -266,7 +267,7 @@ Again the co-efficient associated with the active drug is negative. The stratum 
 
      View(cox.df)
 
-    cox.df<-cox.df %>% mutate(
+     cox.df<-cox.df %>% mutate(
                            hr    = sprintf("%11.2f", estimate)
                          , hr_ci = paste(sprintf("%6.2f", conf.low)
                                        , gsub("^\\s+","",sprintf("%6.2f", conf.high))
@@ -274,10 +275,10 @@ Again the co-efficient associated with the active drug is negative. The stratum 
                          ) %>% 
                    select (strata = term, starts_with("hr"))
         
-     View(cox.df)
+      View(cox.df)
   ```
 
-# 5. Transpose data to shell format
+
 
 
 
